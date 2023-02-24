@@ -1,2 +1,3 @@
 # JKLnyt_backend
-GIT-repo of the backend for course TIEA3290
+
+Backend for https://github.com/jantsavlog/JKLnyt_GIT
