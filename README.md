@@ -7,8 +7,8 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 #### Windows:
 
-> set FLASK_APP=app.py
-> set FLASK_ENV=development
+> set FLASK_APP=app.py <br/>
+> set FLASK_ENV=development <br/>
 > py -m flask run
 
 #### Check out in browser:
