@@ -5,11 +5,12 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 ## How to run locally?
 
-Windows:
+#### Windows:
 
-set FLASK_APP=app.py
-set FLASK_ENV=development
-py -m flask run
+> set FLASK_APP=app.py
+> set FLASK_ENV=development
+> py -m flask run
 
-Check out in browser:
-http://127.0.0.1:5000/countries
+#### Check out in browser:
+
+> http://127.0.0.1:5000/countries
