@@ -69,7 +69,4 @@ def scrape_lutakko():
     for i in events:
         lutakko.append(json.dumps(i.__dict__, ensure_ascii=False))
 
-    return lutakko;
-
-# printtaa ekan eventin
-# print(lutakko[0])
+    return lutakko
