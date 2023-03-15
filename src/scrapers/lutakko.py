@@ -27,7 +27,7 @@ def scrape_lutakko():
             continue
 
         # alusta event
-        event = Event("", 0, 0, 0, 0, 0, None)
+        event = Event("", 0, 0, 0, 0, 0, None, "")
         # päivämäärä
         date = i.find('div', {'class':'date'}).span.text
         # ikäraja

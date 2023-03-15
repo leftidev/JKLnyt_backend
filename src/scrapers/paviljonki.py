@@ -19,7 +19,7 @@ def scrape_paviljonki():
 
     for d in divs:
         ahref = d.find("h2", {"class":"event-details__title"}).a
-        event = Event("", 0, 0, 0, 0, 0, 0)
+        event = Event("", 0, 0, 0, 0, 0, None, "")
 
         event.name = ahref.text.strip()
         time = d.find("div", {"class": "event-details__meta"}).text.strip()
@@ -27,6 +27,7 @@ def scrape_paviljonki():
         date = times[-1].replace('\t', '')
         event.day = date.split('.')[0]
         event.month = date.split('.')[1]
+        event.info = ahref.get("href")
         events.append(event)
 
     paviljonki = []
