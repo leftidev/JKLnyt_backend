@@ -17,7 +17,7 @@ collection = db['lutakko']
 
 # Add lutakko events to database
 # NOTE: This needs to be done only once when populating the database collection with content!!!!!
-#collection.insert_many(tapahtumat)
+collection.insert_many(tapahtumat)
 
 @app.route('/')
 def hello_world():
@@ -39,13 +39,3 @@ def get_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-#On Windows, the location is <install directory>/bin/mongod.cfg. Open mongod.cfg file and check for dbPath option.
-
-#C:\Program Files\MongoDB\Server\6.0\data
-
-# curl http://localhost:5000/get

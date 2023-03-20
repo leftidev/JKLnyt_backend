@@ -1,4 +1,5 @@
 import requests
+from bson import json_util
 from bs4 import BeautifulSoup
 import re
 from scrapers.event import Event
@@ -63,12 +64,13 @@ def scrape_lutakko():
             names.append(span.text)
         
         event.name = ' '.join(names)
-        events.append(event)
-
+        events.append(event);
+    
     lutakko = []
     for i in events:
-        lutakko.append(json.dumps(i.__dict__, ensure_ascii=False))
-
+        #lutakko.append(json.loads(json_util.dumps(i.__dict__)))
+        lutakko.append(i.__dict__)
+        
     return lutakko;
 
 # printtaa ekan eventin
