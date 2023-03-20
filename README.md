@@ -2,6 +2,11 @@
 
 Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
+## Prerequisites:
+
+MongoDB
+Pymongo
+Flask
 
 ## How to run locally?
 
@@ -13,4 +18,9 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 #### Check out in browser:
 
-> http://127.0.0.1:5000/countries
+> http://127.0.0.1:5000/get
+
+#### Note:
+
+> Creates a Mongo database and a collection -> populates it with scraped event data
+> Endpoint displays data from the collection as JSON
