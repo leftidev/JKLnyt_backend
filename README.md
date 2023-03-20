@@ -4,9 +4,9 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 ## Prerequisites:
 
-MongoDB
-Pymongo
-Flask
+MongoDB <br/>
+Pymongo <br/>
+Flask <br/>
 
 ## How to run locally?
 
@@ -22,5 +22,5 @@ Flask
 
 #### Note:
 
-> Creates a Mongo database and a collection -> populates it with scraped event data
+> Creates a Mongo database and a collection -> populates it with scraped event data <br/>
 > Endpoint displays data from the collection as JSON
