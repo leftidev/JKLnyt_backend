@@ -5,14 +5,14 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 ## Prerequisites:
 
 #### Technologies
-MongoDB <br/>
-Python <br/>
+- MongoDB <br/>
+- Python <br/>
 
 #### Python libraries
-Pymongo <br/>
-Flask <br/>
-BeautifulSoup4 <br/>
-Requests
+- Pymongo <br/>
+- Flask <br/>
+- BeautifulSoup4 <br/>
+- Requests
 
 ## Functionality
 
