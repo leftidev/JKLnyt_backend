@@ -28,7 +28,7 @@ def scrape_lutakko():
             continue
 
         # alusta event
-        event = Event("", 0, 0, 0, 0, 0, None)
+        event = Event("", 0, 0, 0, 0, 0, None, "")
         # päivämäärä
         date = i.find('div', {'class':'date'}).span.text
         # ikäraja
@@ -68,7 +68,7 @@ def scrape_lutakko():
     
     lutakko = []
     for i in events:
-        #lutakko.append(json.loads(json_util.dumps(i.__dict__)))
+        #lutakko.append(json.dumps(i.__dict__, ensure_ascii=False))
         lutakko.append(i.__dict__)
         
     return lutakko;
