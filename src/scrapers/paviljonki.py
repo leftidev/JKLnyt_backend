@@ -9,7 +9,7 @@ def scrape_paviljonki():
     events = []
 
     resp = requests.get('https://www.paviljonki.fi/tapahtumat-liput/').text
-    # print(resp)
+    #print(resp)
 
     # HTMLFile = open("paviljonki.html", "rb")
     # html = HTMLFile.read()
@@ -19,7 +19,7 @@ def scrape_paviljonki():
 
     for d in divs:
         ahref = d.find("h2", {"class":"event-details__title"}).a
-        event = Event("", 0, 0, 0, 0, 0, None, "")
+        event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
 
         event.name = ahref.text.strip()
         time = d.find("div", {"class": "event-details__meta"}).text.strip()
@@ -28,6 +28,11 @@ def scrape_paviljonki():
         event.day = date.split('.')[0]
         event.month = date.split('.')[1]
         event.info = ahref.get("href")
+        event.venue = "Paviljonki"
+        event.lat = 62.24031954660093
+        event.lon = 25.757825059521508
+        cat = d.find("span", {"class":"tag-list-item"}).text
+        event.category = cat
         events.append(event)
 
     paviljonki = []

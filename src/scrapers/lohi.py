@@ -24,13 +24,17 @@ def scrape_lohi():
         if (home.lower() == 'lohi'):
             time = row[0]
             time = time.text.split(" ")[1].split(".")
-            event = Event("", 0, 0, 0, 0, 0, None, "")
+            event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
             event.name = home + " vs " + row[2].text
             event.day = time[0]
             event.month = time[1]
             event.agelimit = "Ei ikärajaa"
             event.price = "Ei tiedossa"
             event.info = "https://jyvaskylanlohi.fi/ottelut/"
+            event.category = "Urheilu"
+            event.venue = "Koskenharjun kenttä"
+            event.lat = 62.257963560783836
+            event.lon = 25.750349812082813
 
             if (len(time) > 3):
                 event.tstart = time[2]+":"+time[3]

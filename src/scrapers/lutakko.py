@@ -28,7 +28,7 @@ def scrape_lutakko():
             continue
 
         # alusta event
-        event = Event("", 0, 0, 0, 0, 0, None, "")
+        event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
         # päivämäärä
         date = i.find('div', {'class':'date'}).span.text
         # ikäraja
@@ -54,6 +54,10 @@ def scrape_lutakko():
         event.month = date.split(event.day)[1].replace('.', '')
         event.tstart = time.split('-')[0]
         event.tend = time.split('-')[1]
+        event.venue = "Tanssisali lutakko"
+        event.category = "Musiikki"
+        event.lat = 62.23927497596992
+        event.lon = 25.754647658270674
 
         # esiintyjätiedot
         spans = i.a.find_all('span')
@@ -64,14 +68,14 @@ def scrape_lutakko():
             names.append(span.text)
         
         event.name = ' '.join(names)
-        events.append(event);
+        events.append(event)
     
     lutakko = []
     for i in events:
         #lutakko.append(json.dumps(i.__dict__, ensure_ascii=False))
         lutakko.append(i.__dict__)
         
-    return lutakko;
+    return lutakko
 
 # printtaa ekan eventin
 # print(lutakko[0])
