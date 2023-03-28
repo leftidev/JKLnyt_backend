@@ -24,7 +24,7 @@ def scrape_jjk():
         regex = r"(?=(?:\b[01]\d|2[0-3]):[0-5]\d\b)"
         nameTime = re.split(regex, eText.split(" ", 1)[1])
 
-        event = Event("", 0, 0, 0, 0, 0, None, "")
+        event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
         event.day = date.split(".")[0]
         event.month = date.split(".")[1]
         event.name = nameTime[0]
@@ -32,6 +32,10 @@ def scrape_jjk():
         event.price = "Ei tiedossa"
         event.info = "https://www.jjk.fi/otteluohjelma/"
         event.agelimit = "Ei ikärajaa"
+        event.category = "Urheilu"
+        event.venue = "Harjun Stadion"
+        event.lat = 62.244983758151776
+        event.lon = 25.740459560236086
         events.append(event)
 
     jjk = []
