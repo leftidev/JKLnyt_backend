@@ -32,3 +32,18 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 #### Check out in browser:
 
 > http://127.0.0.1:5000/get
+
+## Running on a server with seperate Podman/Docker containers
+
+### 1. Create a network:
+> podman network create JKLnyt-network
+
+### 2. Start Python REST API container and add to the network:
+> root(in our repo: src/): podman build --tag jklnyt-docker .
+> root(in our repo: src/): podman run --name JKLnyt --network JKLnyt-network --detach --publish 50001:80 jklnyt-docker:latest
+
+### 3. Start MongoDB container and add to the network:
+> podman run --name mongo --network JKLnyt-network --detach mongo
+
+### 4. Persist containers when user exits:
+> loginctl enable-linger 
