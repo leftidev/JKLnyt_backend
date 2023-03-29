@@ -30,6 +30,10 @@ def scrape_escape():
             event.info = "https://escapejkl.fi/tapahtumat/"
             event.agelimit = "Ei tiedossa"
             event.price = "Ei tiedossa"
+            event.category = "Musiikki"
+            event.venue = "Club Escape"
+            event.lat = 62.24392610962945
+            event.lon = 25.74999909853728
             events.append(event)
         
 
