@@ -40,7 +40,8 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 #### 2. Start Python REST API container and add to the network:
 > root(in our repo: src/): podman build --tag jklnyt-docker . <br/>
-> root(in our repo: src/): podman run --name JKLnyt --network JKLnyt-network --detach --publish 50001:80 jklnyt-docker:latest
+> root(in our repo: src/): podman run --name JKLnyt --network JKLnyt-network --detach --publish 50001:80 jklnyt-docker:latest  <br/>
+(NOTE for --publish: the left-hand port number is the Docker host port(your computer) and the right-hand side is the Docker container port.)
 
 #### 3. Start MongoDB container and add to the network:
 > podman run --name mongo --network JKLnyt-network --detach mongo
