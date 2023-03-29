@@ -35,15 +35,15 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 ## Running on a server with seperate Podman/Docker containers
 
-### 1. Create a network:
+#### 1. Create a network:
 > podman network create JKLnyt-network
 
-### 2. Start Python REST API container and add to the network:
-> root(in our repo: src/): podman build --tag jklnyt-docker .
+#### 2. Start Python REST API container and add to the network:
+> root(in our repo: src/): podman build --tag jklnyt-docker . <br/>
 > root(in our repo: src/): podman run --name JKLnyt --network JKLnyt-network --detach --publish 50001:80 jklnyt-docker:latest
 
-### 3. Start MongoDB container and add to the network:
+#### 3. Start MongoDB container and add to the network:
 > podman run --name mongo --network JKLnyt-network --detach mongo
 
-### 4. Persist containers when user exits:
+#### 4. Persist containers when user exits:
 > loginctl enable-linger 
