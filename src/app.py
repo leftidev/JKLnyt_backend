@@ -2,6 +2,10 @@ from flask import Flask, jsonify
 from pymongo import MongoClient
 
 from scrapers.lutakko import scrape_lutakko
+from scrapers.paviljonki import scrape_paviljonki
+from scrapers.lohi import scrape_lohi
+from scrapers.jjk import scrape_jjk
+from scrapers.escape import scrape_escape
 
 
 # Create flask app and connect to MongoDB database using PyMongo
@@ -11,17 +15,25 @@ client = MongoClient("mongodb://mongo:27017/")
 # Testing on localhost
 #client = MongoClient('mongodb://localhost:27017/')
 
-db = client['lutakko']
+db = client['JKLnyt']
 
-# Scrape data from lutakko
-tapahtumat = scrape_lutakko();
+# Scrape data from venues
+tapahtumat_lutakko = scrape_lutakko();
+tapahtumat_paviljonki = scrape_paviljonki();
+tapahtumat_lohi = scrape_lohi();
+tapahtumat_jjk = scrape_jjk();
+tapahtumat_escape = scrape_escape();
 
-# Create a MongoDB collection for lutakko
-collection = db['lutakko']
+# Create a MongoDB collection for events
+collection = db['events']
 
-# Add lutakko events to database
-# NOTE: This needs to be done only once when populating the database collection with content!!!!!
-collection.insert_many(tapahtumat)
+# Add scraped events to database
+# NOTE: This needs to be done only when populating the database collection with content!!!!!
+collection.insert_many(tapahtumat_lutakko)
+collection.insert_many(tapahtumat_paviljonki)
+collection.insert_many(tapahtumat_lohi)
+collection.insert_many(tapahtumat_jjk)
+collection.insert_many(tapahtumat_escape)
 
 @app.route('/')
 def hello_world():
@@ -29,7 +41,7 @@ def hello_world():
 
 @app.get("/events")
 def get_events():
-    return tapahtumat
+    return tapahtumat_lutakko
 
 # Retrieves all the data from MongoDB collection, converts the _id field to a string (because it's not JSON serializable by default), and returns the data as a JSON response
 @app.route('/get', methods=['GET'])

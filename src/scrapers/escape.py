@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-from event import Event
+from scrapers.event import Event
 import json
 
 
@@ -21,7 +21,7 @@ def scrape_escape():
         eText = p.text
         # suodata tyhjät pois
         if (eText.strip() != ""):
-            event = Event("", 0, 0, 0, 0, 0, None, "")
+            event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
             textSplit = eText.split(" ", 1)
             event.name = textSplit[1]
             date = textSplit[0]
@@ -35,6 +35,7 @@ def scrape_escape():
 
     escape = []
     for i in events:
-        escape.append(json.dumps(i.__dict__, ensure_ascii=False))
+        #escape.append(json.dumps(i.__dict__, ensure_ascii=False))
+        escape.append(i.__dict__)
 
     return escape

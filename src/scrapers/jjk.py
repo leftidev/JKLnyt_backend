@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-from event import Event
+from scrapers.event import Event
 import json
 
 
@@ -40,6 +40,7 @@ def scrape_jjk():
 
     jjk = []
     for i in events:
-        jjk.append(json.dumps(i.__dict__, ensure_ascii=False))
+        #jjk.append(json.dumps(i.__dict__, ensure_ascii=False))
+        jjk.append(i.__dict__)
 
     return jjk

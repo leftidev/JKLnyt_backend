@@ -1,7 +1,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-from event import Event
+from scrapers.event import Event
 import json
 
 def scrape_paviljonki():
@@ -37,6 +37,7 @@ def scrape_paviljonki():
 
     paviljonki = []
     for i in events:
-        paviljonki.append(json.dumps(i.__dict__, ensure_ascii=False))
+        #paviljonki.append(json.dumps(i.__dict__, ensure_ascii=False))
+        paviljonki.append(i.__dict__)
 
     return paviljonki

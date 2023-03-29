@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-from event import Event
+from scrapers.event import Event
 import json
 
 
@@ -45,6 +45,7 @@ def scrape_lohi():
 
     lohi = []
     for i in events:
-        lohi.append(json.dumps(i.__dict__, ensure_ascii=False))
+        #lohi.append(json.dumps(i.__dict__, ensure_ascii=False))
+        lohi.append(i.__dict__)
 
     return lohi
