@@ -21,8 +21,8 @@ db = client['JKLnyt']
 # Create a MongoDB collection for events
 collection = db['events']
 
-# Define API key for testing
-API_KEY = '123456'
+# Define API key
+API_KEY = ''
     
 # Define a function to scrape data from venues and insert it into the MongoDB collection
 def scrape_and_insert():
@@ -41,9 +41,9 @@ def scrape_and_insert():
     # Debug print
     print('Data inserted to collection "events" succesfully')
 
-# Create a scheduler to run the scraper function every 10 seconds
+# Create a scheduler to run the scraper function every 24 hours
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=scrape_and_insert, trigger='interval', seconds=10)
+scheduler.add_job(func=scrape_and_insert, trigger='interval', hours=24)
 scheduler.start()
 
 # Retrieves all the data from MongoDB collection, converts the _id field to a string (because it's not JSON serializable by default), and returns the data as a JSON response
