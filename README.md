@@ -4,7 +4,7 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 
 ## Prerequisites:
 
-#### Technologies
+#### Tech
 - MongoDB <br/>
 - Python <br/>
 
@@ -12,12 +12,16 @@ Backend for https://github.com/jantsavlog/JKLnyt_GIT
 - Pymongo <br/>
 - Flask <br/>
 - BeautifulSoup4 <br/>
-- Requests
+- Requests <br/>
+- BackgroundScheduler
 
 ## Functionality
 
+- Python REST API and MongoDB
 - Creates a MongoDB database and a collection, then populates it with scraped event data <br/>
 - Endpoint displays data from the collection as JSON
+- Scraping is done between set intervals (default 24 hours)
+- Authentication done by a simple API Key
 
 ## Running locally
 
