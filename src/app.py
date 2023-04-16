@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from pymongo import MongoClient
 
 from scrapers.lutakko import scrape_lutakko
@@ -10,10 +10,10 @@ from scrapers.escape import scrape_escape
 
 # Create flask app and connect to MongoDB database using PyMongo
 app = Flask(__name__)
-client = MongoClient("mongodb://mongo:27017/")
+#client = MongoClient("mongodb://mongo:27017/")
 
 # Testing on localhost
-#client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://localhost:27017/')
 
 db = client['JKLnyt']
 
@@ -35,17 +35,19 @@ collection.insert_many(tapahtumat_lohi)
 collection.insert_many(tapahtumat_jjk)
 collection.insert_many(tapahtumat_escape)
 
-@app.route('/')
-def hello_world():
-    return '<h1>Hello from the JKLnyt team!</h2>'
+# Define API key for testing
+API_KEY = '123456'
 
-@app.get("/events")
-def get_events():
-    return tapahtumat_lutakko
 
 # Retrieves all the data from MongoDB collection, converts the _id field to a string (because it's not JSON serializable by default), and returns the data as a JSON response
 @app.route('/get', methods=['GET'])
 def get_data():
+    # Note that this is a simple way to add API key authentication, but it's not the most secure method. 
+    # A more secure approach would involve using a token-based authentication system, such as OAuth2.
+    api_key = request.headers.get('X-API-KEY')
+    if api_key != API_KEY:
+        return jsonify({'error': 'Unauthorized access'}), 401
+    
     data = []
     for item in collection.find():
         item['_id'] = str(item['_id'])
