@@ -11,10 +11,10 @@ from scrapers.escape import scrape_escape
 
 # Create flask app and connect to MongoDB database using PyMongo
 app = Flask(__name__)
-client = MongoClient("mongodb://mongo:27017/")
+#client = MongoClient("mongodb://mongo:27017/")
 
 # Testing on localhost
-#client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://localhost:27017/')
 
 db = client['JKLnyt']
 
@@ -40,6 +40,9 @@ def scrape_and_insert():
     collection.insert_many(tapahtumat_escape)
     # Debug print
     #print('Data inserted to collection "events" succesfully')
+
+# Do initial scrape before scheduling scraping
+scrape_and_insert()
 
 # Create a scheduler to run the scraper function every 24 hours
 scheduler = BackgroundScheduler()
