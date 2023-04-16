@@ -11,10 +11,10 @@ from scrapers.escape import scrape_escape
 
 # Create flask app and connect to MongoDB database using PyMongo
 app = Flask(__name__)
-#client = MongoClient("mongodb://mongo:27017/")
+client = MongoClient("mongodb://mongo:27017/")
 
 # Testing on localhost
-client = MongoClient('mongodb://localhost:27017/')
+#client = MongoClient('mongodb://localhost:27017/')
 
 db = client['JKLnyt']
 
