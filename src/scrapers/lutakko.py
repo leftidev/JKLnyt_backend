@@ -1,8 +1,10 @@
 import requests
-from bson import json_util
+#from bson import json_util
 from bs4 import BeautifulSoup
 import re
 from scrapers.event import Event
+# from event import Event
+from datetime import date
 import json
 
 
@@ -27,10 +29,23 @@ def scrape_lutakko():
         if i.a.span is None:
             continue
 
+        # hae eventin dd/mm ja nykyhetken
+        dateVar = i.find('div', {'class':'date'}).span.text
+        dayVar = dateVar.split(" ")[1].split(".")[0]
+        monthVar = dateVar.split(dayVar)[1].replace('.', '')
+        today = date.today()
+        
+        # tarkista menikö ekan eventin pvm jo
+        if (len(events) == 0):
+            if (today.month > int(monthVar)):
+                continue
+            if (today.month == int(monthVar)):
+                if (today.day > int(dayVar)):
+                    continue
+
         # alusta event
         event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
-        # päivämäärä
-        date = i.find('div', {'class':'date'}).span.text
+        
         # ikäraja
         age = i.find('div', {'class':'age-limit'})
         # kellonaika
@@ -50,8 +65,8 @@ def scrape_lutakko():
         # aseta eventille attribuuttien arvot
         event.price = '-'.join([min(priceRange, key=int), max(priceRange, key=int)])
         event.agelimit = age
-        event.day = date.split(" ")[1].split(".")[0]
-        event.month = date.split(event.day)[1].replace('.', '')
+        event.day = dayVar
+        event.month = monthVar
         event.tstart = time.split('-')[0]
         event.tend = time.split('-')[1]
         event.venue = "Tanssisali lutakko"
@@ -67,7 +82,7 @@ def scrape_lutakko():
             # esiintyjät
             names.append(span.text)
         
-        event.name = ' '.join(names)
+        event.name = ', '.join(names)
         events.append(event)
     
     lutakko = []
@@ -76,6 +91,3 @@ def scrape_lutakko():
         lutakko.append(i.__dict__)
         
     return lutakko
-
-# printtaa ekan eventin
-# print(lutakko[0])

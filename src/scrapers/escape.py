@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from scrapers.event import Event
+# from event import Event
+from datetime import date
 import json
 
 
@@ -21,12 +23,28 @@ def scrape_escape():
         eText = p.text
         # suodata tyhjät pois
         if (eText.strip() != ""):
-            event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
+            # hae tapahtuman ja nykyhetken pvm
             textSplit = eText.split(" ", 1)
+            dateVar = textSplit[0]
+            dayVar = dateVar.split(".")[0]
+            monthVar = dateVar.split(".")[1]
+            today = date.today()
+
+            # jos ekan eventin pvm on jo mennyt, oletetaan että vanha
+            if (len(events) == 0):
+                # jos kuukaus on mennyt, kokeile seuraavaa
+                if (today.month > int(monthVar)):
+                    continue
+                if (today.month == int(monthVar)):
+                    # jos pv on vanha, seuraava
+                    if (today.day > int(dayVar)):
+                        continue
+
+            # jos ei vanha event, luo Event objekti
+            event = Event("", 0, 0, 0, 0, 0, None, "", "", "", 0, 0)
             event.name = textSplit[1]
-            date = textSplit[0]
-            event.day = date.split(".")[0]
-            event.month = date.split(".")[1]
+            event.day = dayVar
+            event.month = monthVar
             event.info = "https://escapejkl.fi/tapahtumat/"
             event.agelimit = "Ei tiedossa"
             event.price = "Ei tiedossa"
