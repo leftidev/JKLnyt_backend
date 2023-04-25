@@ -40,6 +40,7 @@ def scrape_paviljonki():
         event.month = monthVar
         event.info = ahref.get("href")
         event.venue = "Paviljonki"
+        event.price = "Ei tiedossa"
         event.lat = 62.24031954660093
         event.lon = 25.757825059521508
         cat = d.find("span", {"class":"tag-list-item"}).text
