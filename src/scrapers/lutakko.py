@@ -71,6 +71,7 @@ def scrape_lutakko():
         event.tend = time.split('-')[1]
         event.venue = "Tanssisali lutakko"
         event.category = "Musiikki"
+        event.info = 'https://jelmu.net'
         event.lat = 62.23927497596992
         event.lon = 25.754647658270674
 
