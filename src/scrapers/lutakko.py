@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from scrapers.event import Event
-# from event import Event
+#from event import Event
 from datetime import date
 import json
 
@@ -52,9 +52,15 @@ def scrape_lutakko():
         time = i.find('div', {'class':'time'}).span.text
         # lippujen hinta
         tickets = i.find('div', {'role':'tickets'})
-        idx = tickets.text.find('â‚¬')
-        prices = re.sub(r"[\n\t]*", "", tickets.text[0:idx])
-        priceRange = re.findall(r'\d+', prices)
+
+        # tarkista onko tapahtumalla hintoja
+        if (tickets != None):
+            idx = tickets.text.find('â‚¬')
+            prices = re.sub(r"[\n\t]*", "", tickets.text[0:idx])
+            priceRange = re.findall(r'\d+', prices)
+            event.price = '-'.join([min(priceRange, key=int), max(priceRange, key=int)])
+        else:
+            event.price = "Ei tiedossa"
 
         # handlaa jos ikäraja-elementtiä ei ole
         if age is None:
@@ -63,7 +69,6 @@ def scrape_lutakko():
             age = age.span.text
 
         # aseta eventille attribuuttien arvot
-        event.price = '-'.join([min(priceRange, key=int), max(priceRange, key=int)])
         event.agelimit = age
         event.day = dayVar
         event.month = monthVar
